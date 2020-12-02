@@ -22,3 +22,12 @@ const solve = async () => {
 
 solve().then(console.log);
 // 1014624
+
+
+
+
+
+
+
+
+

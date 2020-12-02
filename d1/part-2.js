@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 
 const parseLines = async () => {
-  const data = await fs.readFile('./example', {encoding: 'utf-8'});
+  const data = await fs.readFile('./input', {encoding: 'utf-8'});
   return data.split('\n');
 };
 
