@@ -20,11 +20,11 @@ const getCommonChars = (group) => {
   const people = group.split('\n');
   return people.reduce((acc, str) => {
     const curr = new Set(str);
-    return union(acc, curr);
+    return intersect(acc, curr);
   }, new Set(people[0]));
 };
 
-const union = (s1, s2) => {
+const intersect = (s1, s2) => {
   const newSet = new Set();
   for (let item of s1) {
     if (s2.has(item))
