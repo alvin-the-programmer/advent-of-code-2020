@@ -21,6 +21,7 @@ const solve = async () => {
       graph[source].push(destination)
     }
   }
+  console.log(graph);
   
   const numBags = traverse(graph, 'shiny gold bag');
   return numBags.size - 1;
@@ -49,7 +50,6 @@ const parseLine = (line) => {
 
     sources.push(source);
   }
-
   return {
     destination,
     sources
@@ -59,4 +59,4 @@ const parseLine = (line) => {
 
 
 
-solve().then(console.log);
+solve().then(console.log); // 101

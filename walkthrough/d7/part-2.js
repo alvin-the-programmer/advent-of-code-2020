@@ -6,7 +6,6 @@ const readLines = async () => {
   const data = await fs.readFile('./input', {encoding: 'utf-8'});
   return data.split('\n');
 };
-
 const solve = async () => {
   const lines = await readLines();
   const graph = {};
@@ -14,17 +13,17 @@ const solve = async () => {
     const { destination, sources } = parseLine(line);
     graph[destination] = sources;
   }
-  console.log(graph);
+
   return traverse(graph, 'shiny gold bag') - 1;
 };
 
 const traverse = (graph, node) => {
-  let totalBags = 1;
+  let count = 1;
   for (let neighbor in graph[node]) {
     const qty = graph[node][neighbor];
-    totalBags += qty * traverse(graph, neighbor);
+    count += qty * traverse(graph, neighbor);
   }
-  return totalBags;
+  return count;
 };
 
 const parseLine = (line) => {
@@ -58,4 +57,7 @@ const parseLine = (line) => {
 
 
 
-solve().then(console.log);
+
+
+
+solve().then(console.log); // 108636

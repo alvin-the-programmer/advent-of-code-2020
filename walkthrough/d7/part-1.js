@@ -12,43 +12,47 @@ const solve = async () => {
   const graph = {};
   for (let line of lines) {
     const { destination, sources } = parseLine(line);
-    graph[destination] = sources;
+    if (!(destination in graph))
+      graph[destination] = [];
+    
+    for (let source of sources) {
+      if (!(source in graph))
+        graph[source] = [];
+      graph[source].push(destination);
+    }
   }
-  console.log(graph);
+
   return traverse(graph, 'shiny gold bag') - 1;
 };
 
-const traverse = (graph, node) => {
-  let totalBags = 1;
-  for (let neighbor in graph[node]) {
-    const qty = graph[node][neighbor];
-    totalBags += qty * traverse(graph, neighbor);
+const traverse = (graph, node, visited = new Set()) => {
+  if (visited.has(node))
+    return 0;
+  
+  visited.add(node);
+
+  let numBagColors = 1;
+  for (let neighbor of graph[node]) {
+    numBagColors += traverse(graph, neighbor, visited);
   }
-  return totalBags;
+  return numBagColors;
 };
 
 const parseLine = (line) => {
   const [ destination, rest ] = line.split('s contain ');
-  if (rest.slice(0, 3) === 'no ') {
-    return {
-      destination,
-      sources: {}
-    };
-  }
 
   const sourceSegments = rest.split(', ');
-  const sources = {};
+  const sources = [];
   for (let i = 0; i < sourceSegments.length; i += 1) {
     const segment = sourceSegments[i];
     const amount = Number(segment[0]);
     let source = amount === 1 ? segment.slice(2) : segment.slice(2, -1);
-    
+
     if (i === sourceSegments.length - 1)
       source = source.slice(0, -1);
 
-    sources[source] = amount;
+    sources.push(source);
   }
-
   return {
     destination,
     sources
@@ -56,6 +60,4 @@ const parseLine = (line) => {
 };
 
 
-
-
-solve().then(console.log);
+solve().then(console.log); // 101
