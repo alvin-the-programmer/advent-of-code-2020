@@ -1,5 +1,3 @@
-const { read } = require('fs');
-
 const fs = require('fs').promises;
 
 const readLines = async () => {
