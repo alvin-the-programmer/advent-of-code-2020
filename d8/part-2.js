@@ -49,4 +49,4 @@ const parseLine = (line) => {
   return { op, val: Number(val) };
 };
 
-solve().then(console.log);
+solve().then(console.log); // 1539

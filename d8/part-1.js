@@ -33,4 +33,4 @@ const parseLine = (line) => {
 };
 
 
-solve().then(console.log); 
+solve().then(console.log); // 1489

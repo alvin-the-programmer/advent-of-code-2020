@@ -49,5 +49,5 @@ const hasSum = (numbers, target) => {
   }
   return false;
 };
-// 373803594
+
 solve().then(console.log);
