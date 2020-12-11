@@ -11,26 +11,23 @@ const solve = async () => {
   return firstInvalid(numbers);
 };
 
-
 const firstInvalid = (numbers) => {
   for (let i = 25; i < numbers.length; i++) {
-    const target = numbers[i];
-    const previousNums = numbers.slice(i - 25, i);
-    if (!hasSum(previousNums, target)) {
-     return target;
+    const prev = numbers.slice(i-25, i);
+    if (pairSum(prev, numbers[i]) === false) {
+      return numbers[i];
     }
   }
 };
 
-
-const hasSum = (numbers, target) => {
-  for (let numA of numbers) {
-    for (let numB of numbers) {
-      if (numA + numB === target)
+const pairSum = (array, target) => {
+  for (let i = 0; i < array.length; i++) {
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[i] + array[j] === target)
         return true;
     }
   }
   return false;
-}
+};
 
-solve().then(console.log);
+solve().then(console.log); // 373803594
