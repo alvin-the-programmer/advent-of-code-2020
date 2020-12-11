@@ -39,7 +39,7 @@ const numWays = (array, i=0, memo={}) => {
   return memo[i];
 }
 
-solve().then(console.log);
+solve().then(console.log); // 8099130339328
 
 // brute force below too slow ¯\_(ツ)_/¯
 // need to use dynamic programming, otherwise O(3^n) time

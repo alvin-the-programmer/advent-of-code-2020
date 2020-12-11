@@ -10,21 +10,21 @@ const solve = async () => {
   const numbers = lines.map(Number);
   const sorted = numbers.sort((a, b) => a - b);
   const last = sorted[sorted.length - 1];
-  const input = [0, ...sorted, last + 3];
-  const oneCount = diffCount(input, 1);
-  const threeCount = diffCount(input, 3);
-  return oneCount * threeCount
+  const input = [ 0, ...sorted, last + 3];
+  return diffCount(input, 1) * diffCount(input, 3);
 };
 
-const diffCount = (sorted, diff) => {
+const diffCount = (array, n) => {
   let count = 0;
-  for (let i = 0; i < sorted.length - 1; i += 1) {
-    const curr = sorted[i];
-    const next = sorted[i+1];
-    if (next - curr === diff)
-      count += 1;
+  for (let i = 0; i < array.length - 1; i++) {
+    const curr = array[i];
+    const next = array[i + 1];
+    if (next - curr === n)
+      count++;
   }
   return count;
 };
+
+
 
 solve().then(console.log); // 1848
