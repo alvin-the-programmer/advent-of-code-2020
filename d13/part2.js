@@ -19,6 +19,7 @@ const solve = async () => {
   // take the first bus at time 0
   let totalTime = 0;
   let mainBus = buses[0];
+  
   for (let i = 1; i < buses.length; i++) { // done when we take every bus
     let bus = buses[i];
 
