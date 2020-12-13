@@ -76,4 +76,4 @@ const simulateRound = (grid) => {
 
 
 
-solve().then(console.log); // 1848
+solve().then(console.log); // 2324
