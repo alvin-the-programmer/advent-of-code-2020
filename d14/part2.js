@@ -1,5 +1,3 @@
-const { memory } = require('console');
-
 const fs = require('fs').promises;
 
 const readLines = async () => {
@@ -64,7 +62,7 @@ const getAddresses = (floatAddress) => {
 };
 
 const parseCommand = (line) => {
-  const [ seg, val] = line.split(' = ');
+  const [ seg, val ] = line.split(' = ');
   if (seg.slice(0, 3) === 'mas') {
     return { type: 'mask', value: val };
   } else {
