@@ -19,7 +19,7 @@ const solveSlow = (numbers, n) => {
 // console.log(solveSlow([20,0,1,11,6,3], 2020)); // 421
 
 
-const solveFast = (numbers, n) => {
+const solveObj = (numbers, n) => {
   const history = {};
   let lastNum;
   for (let i = 0; i < numbers.length; i += 1) {
@@ -50,24 +50,51 @@ const solveFast = (numbers, n) => {
 
   return lastNum;
 };
-// console.log(solveFast([0,3,6], 10)); // 0
-// console.log(solveFast([20,0,1,11,6,3], 2020)); // 421
-// console.log(solveFast([0,3,6], 30000000)); // ?
+
+
+const solveMap = (numbers, n) => {
+  const history = new Map();
+  let lastNum;
+  for (let i = 0; i < numbers.length; i += 1) {
+    const num = numbers[i];
+    history.set(num, [i]);
+    lastNum = num;
+  }
+
+  // console.log(history);
+
+  let count = numbers.length;
+  while (count < n) {
+    if (history.get(lastNum).length === 1) {
+      lastNum = 0;
+    } else {
+      const [ old, recent ] = history.get(lastNum);
+      lastNum = recent - old;
+    }
+
+    if (!history.has(lastNum))
+      history.set(lastNum, []);
+
+    history.get(lastNum).push(count);
+
+    if (history.get(lastNum).length > 2)
+      history.get(lastNum).shift();
+
+    count += 1;
+  }
+
+  return lastNum;
+};
+
+
 
 start = Date.now();
-console.log(solveFast([20,0,1,11,6,3], 30000000)); // ?
+console.log(solveMap([20,0,1,11,6,3], 30000000)); // ?
 end = Date.now();
-console.log(`finished in ${end - start}ms`);
+console.log(`js map finished in ${end - start}ms`);
 
 
-// let speedSize = 100000;
-
-// start = Date.now();
-// solveFast([20,0,1,11,6,3], speedSize);
-// end = Date.now();
-// console.log(`finished in ${end - start}ms`);
-
-// start = Date.now();
-// solveSlow([20,0,1,11,6,3], speedSize);
-// end = Date.now();
-// console.log(`finished in ${end - start}ms`);
+start = Date.now();
+console.log(solveObj([20,0,1,11,6,3], 30000000)); // ?
+end = Date.now();
+console.log(`js object finished in ${end - start}ms`);
