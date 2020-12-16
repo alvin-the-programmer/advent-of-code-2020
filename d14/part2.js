@@ -76,4 +76,4 @@ const parseCommand = (line) => {
   }
 };
 
-solve().then(console.log);
+solve().then(console.log); // 4330547254348

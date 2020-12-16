@@ -1,4 +1,3 @@
-const { memory } = require('console');
 
 const fs = require('fs').promises;
 
@@ -10,6 +9,7 @@ const readLines = async () => {
 const solve = async () => {
   const lines = await readLines();
   const commands = lines.map(parseCommand);
+  console.table(commands)
  
   const table = {};
 
@@ -60,4 +60,4 @@ const parseCommand = (line) => {
   }
 };
 
-solve().then(console.log);
+solve().then(console.log); // 11926135976176
