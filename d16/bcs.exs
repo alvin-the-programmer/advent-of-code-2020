@@ -29,7 +29,7 @@ defmodule Ticket do
         Map.keys(field_options)
         |> Enum.reject(fn idx -> !Enum.any?(field_options[idx], fn field -> String.match?(field, ~r/dep/) end) end)
         |> Enum.reduce(%{}, fn idx, acc -> Map.put(acc, idx, field_options[idx]) end)
-        # |> IO.inspect
+        |> IO.inspect
     end
 
     def usable_fields(tickets, idx, rules) do
