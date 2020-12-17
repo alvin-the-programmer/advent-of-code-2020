@@ -74,7 +74,7 @@ const parseInitialNodes = (lines) => {
     for (let y = 0; y < lines[0].length; y += 1) {
       let nodeKey = nodeFromQuad([x, y, 0, 0]);
       if (lines[x][y] === '#')
-      set.add(nodeKey);
+        set.add(nodeKey);
     }
   }
   return set;
