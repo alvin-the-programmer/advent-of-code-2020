@@ -13,7 +13,7 @@ const solve = async () => {
   const nearbyTickets = parseSectionC(sectionC);
   const ranges = fieldArray.reduce((all, field) => [...all, ...field.ranges], []);
 
-  const validTickets = [ myTicket ];
+  const validTickets = [  ];
   for (let ticket of nearbyTickets) {
     const invalid = ticket.some(value => ranges.every(range => !(range[0] <= value && value <= range[1])))
     if (!invalid)
@@ -21,6 +21,10 @@ const solve = async () => {
   }
 
   const columns = transpose(validTickets);
+  console.log(validTickets.length)
+  // console.log(columns.length)
+  // for (let el of columns[9])
+  //   console.log(el);
   const available = [];
 
   for (let label in fields) {
@@ -41,6 +45,11 @@ const solve = async () => {
       }
     }
   }
+
+  // available.forEach((s, idx) => {
+  //   console.log(idx, '->', s)
+  // });
+
   const bijection = {};
   let size = 0
   while (size < available.length) {
@@ -55,7 +64,7 @@ const solve = async () => {
       }
     }
   }
-  console.table(bijection)
+  // console.table(bijection)
   let product = 1;
   for (let field in bijection) {
     if (field.startsWith('departure')) 
