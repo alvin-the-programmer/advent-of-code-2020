@@ -26,4 +26,4 @@ const additionPrioritize = (equation) => {
   return leftPad + demotedMultiply + rightPad;
 };
 
-solve().then(console.log);
+solve().then(console.log); // 88782789402798

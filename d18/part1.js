@@ -8,59 +8,59 @@ const readLines = async () => {
 const solve = async () => {
   const lines = await readLines();
   const equations = lines.map(line => line.split(' ').join(''));
-  return equations.reduce((total, eq) => total + evaluate(eq), 0);
+  return equations.reduce((total, eq) => total + eval(leftPrioritize(eq)), 0);
 };
 
-const calculation = {
-  '+': (a, b) => a + b,
-  '*': (a, b) => a * b
-};
-
-const evaluate = (equation) => {
-  let lastTokenIdx;
-  let num;
+const leftPrioritize = (equation) => {
+  const tokenStartIdx = findLastTokenStart(equation);
   
-  if (equation.endsWith(')')) {
-    lastTokenIdx = lastParenIdx(equation);
-    const containedEquation = equation.slice(lastTokenIdx + 1, -1);
-    num = evaluate(containedEquation);
-  } else {
-    lastTokenIdx = lastNumIdx(equation);
-    num = Number(equation.slice(lastTokenIdx));
-  }
-
-  if (lastTokenIdx === 0)
-    return num;
-
-  const op = equation[lastTokenIdx - 1];
-  const calculate = calculation[op];
-  const remainingEquation = equation.slice(0, lastTokenIdx - 1);
-  const subResult = evaluate(remainingEquation);
-  return calculate(num, subResult);
-};
-
-const lastNumIdx = (str) => {
-  for (let i = str.length - 1; i >= 0; i -= 1) {
-    const char = str[i];
-    if (char === '+' || char === '*')
-      return i + 1;
-  }
-  return 0;
-};
-
-const lastParenIdx = (str) => {
-  let open = 1;
-  for (let i = str.length - 2; i >= 0; i -= 1) {
-    const char = str[i];
-    if (char === ')') {
-      open += 1;
-    } else if (char === '(') {
-      open -= 1;
+  if (tokenStartIdx === 0) {
+    if (equation.endsWith(')')) {
+      return leftPrioritize(equation.slice(1, -1))
+    } else {
+      return equation;
     }
-
-    if (open === 0)
-      return i;
   }
+  
+  const operator = equation[tokenStartIdx - 1];
+  equation[tokenStartIdx - 2] === ')'
+  
+  const leftHandSide = leftPrioritize(equation.slice(0, tokenStartIdx - 1));
+  
+  let rightHandSide;
+
+  if (equation.endsWith(')')) {
+    rightHandSide = leftPrioritize(equation.slice(tokenStartIdx + 1, - 1));
+  } else {
+    rightHandSide = equation.slice(tokenStartIdx);
+  }
+  
+  return `(${leftHandSide})${operator}(${rightHandSide})`;
 };
 
-solve().then(console.log);
+const findLastTokenStart = (str) => {
+  if (str.endsWith(')')) {
+    let open = 1;
+    for (let i = str.length - 2; i >= 0; i -= 1) {
+      const char = str[i];
+      if (char === '(') {
+        open -= 1;
+      } else if (char === ')') {
+        open += 1;
+      }
+
+      if (open === 0)
+        return i;
+    }
+  } else {
+    for (let i = str.length - 1; i >= 0; i -= 1) {
+      const char = str[i];
+      if ('+*'.includes(char)) {
+        return i + 1;
+      }
+    }
+    return 0;
+  }
+}
+
+solve().then(console.log); // 5374004645253
