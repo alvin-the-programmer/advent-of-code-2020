@@ -1,0 +1,18 @@
+--matches before rule 8/11 mutation
+bbabbbbaabaabba
+ababaaaaaabaaab
+ababaaaaabbbaba
+
+--matches after rule 8/11 mutation
+bbabbbbaabaabba
+babbbbaabbbbbabbbbbbaabaaabaaa
+aaabbbbbbaaaabaababaabababbabaaabbababababaaa
+bbbbbbbaaaabbbbaaabbabaaa
+bbbababbbbaaaaaaaabbababaaababaabab
+ababaaaaaabaaab
+ababaaaaabbbaba
+baabbaaaabbaaaababbaababb
+abbbbabbbbaaaababbbbbbaaaababb
+aaaaabbaabaaaaababaa
+aaaabbaabbaaaaaaabbbabbbaaabbaabaaa
+aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba
