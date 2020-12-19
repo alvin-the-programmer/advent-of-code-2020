@@ -21,10 +21,7 @@ const solve = async () => {
   }
 
   const columns = transpose(validTickets);
-  console.log(validTickets.length)
-  // console.log(columns.length)
-  // for (let el of columns[9])
-  //   console.log(el);
+
   const available = [];
 
   for (let label in fields) {
@@ -46,13 +43,11 @@ const solve = async () => {
     }
   }
 
-  // available.forEach((s, idx) => {
-  //   console.log(idx, '->', s)
-  // });
-
+  
   const bijection = {};
   let size = 0
   while (size < available.length) {
+    console.log(available);
     for (let colNum = 0; colNum < available.length; colNum += 1) {
       const candidates = available[colNum];
       if (candidates.size === 1) {
@@ -64,7 +59,7 @@ const solve = async () => {
       }
     }
   }
-  // console.table(bijection)
+
   let product = 1;
   for (let field in bijection) {
     if (field.startsWith('departure')) 
@@ -110,4 +105,4 @@ const parseSectionC = (section) => {
   return lines.map(line => line.split(',').map(Number));
 };
 
-solve().then(console.log); 
+solve().then(console.log);  // 517827547723
