@@ -76,21 +76,21 @@ def print_list(node, seen):
   print(node.value)
   print_list(node.next, seen)
 
+start = time.time()
 TEN_MIL = 10000000
 
-# arr = [3,8,9,1,2,5,4,6,7] # example
 arr = [9,6,2,7,1,3,8,5,4] # input
 
 for i in range(10, 1000001):
   arr.append(i)
 
 cl = CupList(arr)
-start = time.time()
 cl.simulate(TEN_MIL)
-end = time.time()
-print(f"finished in {round(end - start, 2)} seconds")
 
 a = cl.refs[1].next
 b = cl.refs[1].next.next
-print(a.value * b.value)
+res = a.value * b.value
 
+end = time.time()
+print(f"finished in {round(end - start)}s")
+print(res);
